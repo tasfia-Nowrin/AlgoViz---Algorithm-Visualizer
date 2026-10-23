@@ -1,0 +1,353 @@
+/* ---------- Page and panels ---------- */
+body {
+    background: #f1f5f9;
+}
+
+.dark body {
+    background: linear-gradient(160deg, #0b1230 0%, #14224f 55%, #1b2f6b 100%) fixed;
+}
+
+.brand {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.75rem;
+}
+
+.dark .panel {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(148, 163, 255, 0.2);
+}
+
+.panel.accent {
+    border-left: 4px solid #3b82f6;
+}
+
+/* ---------- Buttons and tabs ---------- */
+.btn {
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.btn:hover:not(:disabled) {
+    background: #e2e8f0;
+}
+
+.dark .btn {
+    border-color: rgba(148, 163, 255, 0.35);
+}
+
+.dark .btn:hover:not(:disabled) {
+    background: rgba(148, 163, 255, 0.18);
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.btn-primary,
+.dark .btn-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+.btn-primary:hover:not(:disabled),
+.dark .btn-primary:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+.btn-warn {
+    border-color: #f59e0b;
+    color: #b45309;
+}
+
+.dark .btn-warn {
+    border-color: #f59e0b;
+    color: #fbbf24;
+}
+
+.algo-tab {
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+}
+
+.algo-tab:hover:not(:disabled) {
+    background: rgba(148, 163, 255, 0.15);
+}
+
+.algo-tab.active {
+    border-color: #60a5fa;
+    background: rgba(59, 130, 246, 0.15);
+    font-weight: 700;
+}
+
+.algo-tab:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 5.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.6rem;
+}
+
+.dark .stat {
+    border-color: rgba(148, 163, 255, 0.25);
+}
+
+.stat span {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.7;
+}
+
+.stat strong {
+    font-size: 1.1rem;
+}
+
+/* ---------- Sorting bars ---------- */
+.bar {
+    position: relative;
+    flex: 1;
+    min-width: 2px;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to top, #2563eb, #60a5fa);
+    transition: height 0.1s ease, background-color 0.1s ease;
+}
+
+.dark .bar {
+    background: linear-gradient(to top, #38bdf8, #e0f2fe);
+}
+
+.bar.compare {
+    background: #fbbf24;
+    box-shadow: 0 0 14px #fbbf24;
+}
+
+/* being compared */
+.bar.swap {
+    background: #ef4444;
+    box-shadow: 0 0 14px #ef4444;
+}
+
+/* swapped or written */
+.bar.sorted,
+.dark .bar.sorted {
+    background: #22c55e;
+}
+
+/* final position */
+
+.bar .val {
+    position: absolute;
+    top: -1.3em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+#bars:not(.labels) .val {
+    display: none;
+}
+
+/* ---------- Pathfinding graph ---------- */
+#graphSvg {
+    width: 100%;
+    display: block;
+    touch-action: none;
+    user-select: none;
+}
+
+.ge {
+    stroke: #94a3b8;
+    stroke-width: 1.5;
+    opacity: 0.8;
+}
+
+.dark .ge {
+    stroke: #6366f1;
+    opacity: 0.5;
+}
+
+.ge.active {
+    stroke: #f59e0b;
+    stroke-width: 3;
+    opacity: 1;
+}
+
+.dark .ge.active {
+    stroke: #fbbf24;
+}
+
+.ge.path {
+    stroke: #0891b2;
+    stroke-width: 4;
+    opacity: 1;
+}
+
+.dark .ge.path {
+    stroke: #22d3ee;
+    filter: drop-shadow(0 0 4px #22d3ee);
+}
+
+.gw {
+    fill: #fff;
+    stroke: #cbd5e1;
+    pointer-events: none;
+}
+
+.dark .gw {
+    fill: #1e1b4b;
+    stroke: #4f46e5;
+}
+
+.gwt,
+.gl,
+.gc,
+.gtag {
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+    font-weight: 700;
+    fill: currentColor;
+}
+
+.gwt {
+    font-size: 10px;
+}
+
+.gl {
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.gc {
+    font-size: 10px;
+    fill: #fff;
+}
+
+.gcb {
+    fill: #334155;
+    pointer-events: none;
+}
+
+.gtag {
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.gtag.start {
+    fill: #16a34a;
+}
+
+.gtag.target {
+    fill: #ea580c;
+}
+
+.gn {
+    fill: #fff;
+    stroke: #7c3aed;
+    stroke-width: 2.5;
+    cursor: grab;
+    transition: fill 0.15s, stroke 0.15s;
+}
+
+.dark .gn {
+    fill: #1a1245;
+    stroke: #a78bfa;
+}
+
+.gn.visited {
+    fill: #ddd6fe;
+}
+
+.dark .gn.visited {
+    fill: #5b3fb5;
+}
+
+.gn.active {
+    stroke: #f59e0b;
+    fill: #fde68a;
+}
+
+.dark .gn.active {
+    stroke: #fbbf24;
+    fill: #78580c;
+    filter: drop-shadow(0 0 8px #fbbf24);
+}
+
+.gn.path {
+    stroke: #0891b2;
+    fill: #cffafe;
+}
+
+.dark .gn.path {
+    stroke: #22d3ee;
+    fill: #0e4d5c;
+    filter: drop-shadow(0 0 8px #22d3ee);
+}
+
+.gn.pick {
+    stroke-dasharray: 4 3;
+}
+
+.btn.active {
+    border-color: #60a5fa;
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.sw {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+}
+
+.sw.active {
+    border-color: #fbbf24;
+    background: #78580c;
+}
+
+.sw.visited {
+    border-color: #a78bfa;
+    background: #5b3fb5;
+}
+
+.sw.path {
+    border-color: #22d3ee;
+    background: #0e4d5c;
+}
+
+/* ---------- Accessibility ---------- */
+:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bar,
+    .gn {
+        transition: none;
+    }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="AlgoViz: interactive sorting and pathfinding algorithm visualizer built with HTML, CSS, Tailwind CSS and JavaScript." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>" />
+    <title>AlgoViz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: "class" };
+        if (localStorage.getItem("theme") !== "light") document.documentElement.classList.add("dark");
+    </script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen text-slate-900 dark:text-slate-100">
+    <!-- Header -->
+    <header class="border-b border-slate-300 dark:border-slate-800">
+        <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-4 py-3">
+            <h1 class="brand text-2xl">Algorithm Visualizer</h1>
+            <nav class="flex gap-1" aria-label="Views">
+                <button id="tabSort" class="rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white">Sorting</button>
+                <button id="tabPath" class="rounded-md px-3 py-1.5 text-sm hover:bg-slate-200 dark:hover:bg-slate-800">Pathfinding</button>
+            </nav>
+            <button id="themeBtn" class="rounded-md border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-200 dark:border-slate-700 dark:hover:bg-slate-800" aria-label="Toggle theme">Theme</button>
+        </div>
+    </header>
+    <main class="mx-auto max-w-5xl px-4 py-6">
+        <div id="sortingView" class="space-y-4">
+            <!-- Algorithm tabs -->
+            <nav id="algoTabs" class="panel flex flex-wrap gap-1 p-2" aria-label="Sorting algorithms"></nav>
+            <!-- Controls -->
+            <section class="panel flex flex-wrap items-center gap-3 p-3">
+                <button id="playBtn" class="btn btn-primary">▶ Animate</button>
+                <button id="pauseBtn" class="btn btn-warn">⏸ Pause</button>
+                <button id="resetBtn" class="btn">↺ Reset</button>
+                <button id="stepBtn" class="btn">⏭ Step</button>
+                <button id="newBtn" class="btn">New array</button>
+                <label class="flex items-center gap-2 text-sm">Speed
+                    <input id="speedRange" type="range" min="1" max="100" value="40" class="w-28 accent-blue-500" />
+                </label>
+                <label class="flex items-center gap-2 text-sm">Size <span id="sizeLabel" class="w-6">20</span>
+                    <input id="sizeRange" type="range" min="5" max="100" value="20" class="w-28 accent-blue-500" />
+                </label>
+                <div class="ml-auto flex gap-2">
+                    <div class="stat"><span>Comparisons</span><strong id="cmpCount">0</strong></div>
+                    <div class="stat"><span>Swaps / writes</span><strong id="swapCount">0</strong></div>
+                </div>
+            </section>
+            <p id="status" class="text-sm text-slate-500 dark:text-slate-300" aria-live="polite"></p>
+            <!-- Description -->
+            <section class="panel accent p-4 text-sm">
+                <p><strong id="infoName"></strong>: <span id="infoDesc"></span></p>
+            </section>
+            <!-- Principles -->
+            <details class="panel p-4 text-sm">
+                <summary class="cursor-pointer font-semibold">Principles &amp; Key Concepts</summary>
+                <p id="infoConcept" class="mt-3 max-w-prose text-slate-600 dark:text-slate-300"></p>
+                <dl class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    <div>
+                        <dt class="text-slate-500 dark:text-slate-400">Best</dt>
+                        <dd id="infoBest" class="font-mono"></dd>
+                    </div>
+                    <div>
+                        <dt class="text-slate-500 dark:text-slate-400">Average</dt>
+                        <dd id="infoAvg" class="font-mono"></dd>
+                    </div>
+                    <div>
+                        <dt class="text-slate-500 dark:text-slate-400">Worst</dt>
+                        <dd id="infoWorst" class="font-mono"></dd>
+                    </div>
+                    <div>
+                        <dt class="text-slate-500 dark:text-slate-400">Space</dt>
+                        <dd id="infoSpace" class="font-mono"></dd>
+                    </div>
+                </dl>
+            </details>
+            <!-- Bars -->
+            <section class="panel p-4">
+                <div id="bars" class="flex h-[50vh] items-end gap-px pt-6" aria-label="Array visualization"></div>
+            </section>
+        </div>
+        <!-- Pathfinding view -->
+        <div id="pathView" class="hidden space-y-4">
+            <nav id="pathTabs" class="panel flex flex-wrap gap-1 p-2" aria-label="Pathfinding algorithms"></nav>
+            <!-- Playback -->
+            <section class="panel flex flex-wrap items-center gap-3 p-3">
+                <button id="gPlay" class="btn btn-primary">▶ Animate</button>
+                <button id="gPause" class="btn btn-warn">⏸ Pause</button>
+                <button id="gPrev" class="btn">⏮ Prev</button>
+                <button id="gNext" class="btn">⏭ Next</button>
+                <button id="gReset" class="btn">↺ Reset</button>
+                <label class="flex items-center gap-2 text-sm">Speed
+                    <input id="gSpeed" type="range" min="1" max="100" value="40" class="w-28 accent-blue-500" />
+                </label>
+            </section>
+            <!-- Route planner and tools -->
+            <section class="panel flex flex-wrap items-end gap-3 p-3">
+                <label class="flex flex-col gap-1 text-sm">Start
+                    <select id="gStart"
+                        class="rounded-md border border-slate-300 bg-white px-2 py-1.5 dark:border-slate-600 dark:bg-slate-800"></select>
+                </label>
+                <label class="flex flex-col gap-1 text-sm">Target
+                    <select id="gTarget"
+                        class="rounded-md border border-slate-300 bg-white px-2 py-1.5 dark:border-slate-600 dark:bg-slate-800"></select>
+                </label>
+                <div class="flex gap-1" role="group" aria-label="Graph tool">
+                    <button class="btn" data-tool="move">Move</button>
+                    <button class="btn" data-tool="node">Node</button>
+                    <button class="btn" data-tool="link">Link</button>
+                </div>
+                <button id="gNew" class="btn">New graph</button>
+                <p id="gHint" class="w-full text-sm text-slate-500 dark:text-slate-300"></p>
+            </section>
+            <section class="panel accent p-4 text-sm">
+                <p><strong id="gAlgoName"></strong>: <span id="gAlgoDesc"></span></p>
+            </section>
+            <!-- Graph -->
+            <section class="panel p-2">
+                <div class="flex flex-wrap gap-2 p-2">
+                    <div class="stat"><span>Nodes visited</span><strong id="gVisited">0</strong></div>
+                    <div class="stat"><span>Edges checked</span><strong id="gEdges">0</strong></div>
+                    <div class="stat"><span>Path cost</span><strong id="gCost">-</strong></div>
+                </div>
+                <div id="graphWrap"><svg id="graphSvg" role="img" aria-label="Weighted graph"></svg></div>
+                <p id="gResult" class="p-2 text-sm font-medium" aria-live="polite"></p>
+            </section>
+            <ul class="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300">
+                <li class="flex items-center gap-2"><span class="sw active"></span>Active</li>
+                <li class="flex items-center gap-2"><span class="sw visited"></span>Visited</li>
+                <li class="flex items-center gap-2"><span class="sw path"></span>Path</li>
+                <li class="flex items-center gap-2">Number under a node = cost from the start</li>
+            </ul>
+        </div>
+    </main>
+    <footer class="mx-auto max-w-5xl px-4 pb-8 text-center text-sm text-slate-500">
+        AlgoViz · Built with HTML, CSS, Tailwind CSS and JavaScript
+    </footer>
+    <script src="sorting/bubble.js"></script>
+    <script src="sorting/selection.js"></script>
+    <script src="sorting/insertion.js"></script>
+    <script src="sorting/merge.js"></script>
+    <script src="sorting/quick.js"></script>
+    <script src="sorting/heap.js"></script>
+    <script src="sorting/counting.js"></script>
+    <script src="sorting/radix.js"></script>
+    <script src="pathfinding/utils.js"></script>
+    <script src="pathfinding/bfs.js"></script>
+    <script src="pathfinding/dfs.js"></script>
+    <script src="pathfinding/dijkstra.js"></script>
+    <script src="pathfinding/astar.js"></script>
+    <script src="pathfinding/graph.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
