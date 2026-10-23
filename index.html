@@ -48,11 +48,9 @@
                 </div>
             </section>
             <p id="status" class="text-sm text-slate-500 dark:text-slate-300" aria-live="polite"></p>
-            <!-- Description -->
             <section class="panel accent p-4 text-sm">
                 <p><strong id="infoName"></strong>: <span id="infoDesc"></span></p>
             </section>
-            <!-- Principles -->
             <details class="panel p-4 text-sm">
                 <summary class="cursor-pointer font-semibold">Principles &amp; Key Concepts</summary>
                 <p id="infoConcept" class="mt-3 max-w-prose text-slate-600 dark:text-slate-300"></p>
@@ -97,13 +95,9 @@
             <!-- Route planner and tools -->
             <section class="panel flex flex-wrap items-end gap-3 p-3">
                 <label class="flex flex-col gap-1 text-sm">Start
-                    <select id="gStart"
-                        class="rounded-md border border-slate-300 bg-white px-2 py-1.5 dark:border-slate-600 dark:bg-slate-800"></select>
+                    <select id="gStart" class="rounded-md border border-slate-300 bg-white px-2 py-1.5 dark:border-slate-600 dark:bg-slate-800"></select>
                 </label>
-                <label class="flex flex-col gap-1 text-sm">Target
-                    <select id="gTarget"
-                        class="rounded-md border border-slate-300 bg-white px-2 py-1.5 dark:border-slate-600 dark:bg-slate-800"></select>
-                </label>
+                <label class="flex flex-col gap-1 text-sm">Target<select id="gTarget" class="rounded-md border border-slate-300 bg-white px-2 py-1.5 dark:border-slate-600 dark:bg-slate-800"></select></label>
                 <div class="flex gap-1" role="group" aria-label="Graph tool">
                     <button class="btn" data-tool="move">Move</button>
                     <button class="btn" data-tool="node">Node</button>
