@@ -33,10 +33,8 @@ const playBtn = $("playBtn"), pauseBtn = $("pauseBtn"), resetBtn = $("resetBtn")
 const sizeRange = $("sizeRange"), sizeLabel = $("sizeLabel"), speedRange = $("speedRange");
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-// Speed 1 = slow (1000 ms per step), 100 = fast (10 ms). Read live, so the slider works mid-sort.
 const getDelay = () => Math.round(1000 / Number(speedRange.value));
 
-// ---------- Drawing ----------
 function generateArray(size) {
     return Array.from({ length: size }, () => Math.floor(Math.random() * 91) + 10);
 }
@@ -181,7 +179,7 @@ async function play() {
         applyStep(steps[index++]);
         await sleep(getDelay());
     }
-    if (myRun !== runId) return;   // replaced by Reset or a newer run
+    if (myRun !== runId) return;  
     playing = false;
     if (index >= steps.length) finish();
     updateButtons();
@@ -201,7 +199,6 @@ function stepOnce() {
     updateButtons();
 }
 
-// ---------- Events ----------
 playBtn.addEventListener("click", play);
 pauseBtn.addEventListener("click", pausePlayback);
 resetBtn.addEventListener("click", resetPlayback);
@@ -234,14 +231,12 @@ function showView(name) {
         tab.setAttribute("aria-current", active ? "page" : "false");
     });
 
-    // The graph needs a visible container to measure its width, so build it on first open
     if (!isSort) PathViz.init();
 }
 
 tabSort.addEventListener("click", () => showView("sort"));
 tabPath.addEventListener("click", () => showView("path"));
 
-// ---------- Start ----------
 buildTabs();
 renderInfo();
 newArray();
