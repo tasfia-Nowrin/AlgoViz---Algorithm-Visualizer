@@ -35,19 +35,29 @@ No installation needed.
 
 Tailwind is loaded from its CDN, so an internet connection is required.
 
-## Project structure
+## 📌 Project structure
 
 ```
-algoviz/
+Algoviz/
 ├── index.html
-├── css/style.css
-└── js/
-    ├── main.js              # sorting UI, animation, tabs, theme
-    ├── sorting/             # bubble, selection, insertion, merge, quick
-    └── pathfinding/
-        ├── utils.js         # edge weights, adjacency list, path tracing
-        ├── graph.js         # SVG graph, tools, playback
-        └── bfs.js, dfs.js, dijkstra.js, astar.js
+├── style.css
+├── main.js              
+├── sorting/                  # sorting UI, animation, tabs, theme
+    ├── bubble.js         
+    ├── selection.js         
+    ├── insertion.js
+    ├── merge.js
+    ├── quick.js              
+    ├── counting.js
+    ├── heap.js
+    └── radix.js
+└── pathfinding/              # edge weights, adjacency list, path tracing
+    ├── utils.js         
+    ├── graph.js 
+    ├── bfs.js         
+    ├── astar.js         
+    ├── dfs.js
+    └── dijkstra.js
 ```
 
 ## How it works
