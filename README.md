@@ -5,6 +5,9 @@
 
 AlgoViz is an interactive web-based application that helps students and developers understand algorithms through visual animations. It provides sorting algorithm visualizations and graph-based pathfinding demonstrations using HTML, CSS, Tailwind CSS, and JavaScript.
 
+## 🌐 Live demo
+🔗 https://tasfia-nowrin.github.io/AlgoViz---Algorithm-Visualizer/
+
 
 ## ✨ Features
 
