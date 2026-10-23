@@ -1,100 +1,178 @@
-# 📊AlgoViz
 
-An interactive visualizer for sorting and pathfinding algorithms, built with **HTML, CSS, Tailwind CSS and vanilla JavaScript**. No frameworks and no build step.
+# 📊 AlgoViz — Algorithm Visualizer
+
+> **Visualize Algorithms. Understand How They Work.**
+
+AlgoViz is an interactive web-based application that helps students and developers understand algorithms through visual animations. It provides sorting algorithm visualizations and graph-based pathfinding demonstrations using HTML, CSS, Tailwind CSS, and JavaScript.
 
 
-## 🌐 Live demo:
-🔗 https://YOUR-USERNAME.github.io/algoviz/
+## ✨ Features
+
+### 🔢 Sorting Visualization
+- Visualize multiple sorting algorithms using animated array bars.
+- Generate random arrays and change array size.
+- Control animation speed.
+- Play, pause, reset, and execute algorithms step by step.
+- Track comparisons and swaps or write operations.
+- View algorithm descriptions and time and space complexity.
 
 
-## Features
+### 🗺️ Pathfinding Visualization
+- Explore algorithms on an interactive weighted graph.
+- Select start and target nodes.
+- Visualize visited nodes and discovered paths.
+- Animate algorithm execution.
+- Control playback speed and navigate through steps.
+- View visited nodes, checked edges, and path cost.
+- Create new graphs and interact with nodes and links.
 
-**Sorting**
-- Bubble, Selection, Insertion, Merge, Quick, Heap, Counting and Radix sort
-- Animate, Pause, Step and Reset controls, with live speed and array size
-- Comparison and swap counters, value labels, color-coded bars
-- Big-O complexity and key concepts for each algorithm
 
-**Pathfinding**
-- BFS, DFS, Dijkstra and A* on a weighted graph drawn with SVG
-- Edge costs follow node distance, so Dijkstra and A* find cheaper routes than BFS and DFS
-- Pick start and target nodes, step forward and backward through the search
-- Move nodes, add nodes, and add or remove links to build your own graph
-- Shows nodes visited, edges checked, path cost, and the route found
+### 🎨 User Interface
+- Responsive user interface.
+- Light and dark theme support.
+- Interactive controls and real-time visual feedback.
+- Tailwind CSS utility-based styling.
 
-**General**
-- Dark and light theme (remembered between visits)
-- Responsive layout, keyboard focus styles, reduced-motion support
 
-## Run locally
+## 🧮 Algorithms
 
-No installation needed.
+### Sorting Algorithms
 
-1. Download or clone this repository.
-2. Open `index.html` in a browser (or use the VS Code "Live Server" extension).
+| Algorithm | Best Case | Average Case | Worst Case |
+|---|---|---|---|
+| Bubble Sort | O(n) | O(n²) | O(n²) |
+| Selection Sort | O(n²) | O(n²) | O(n²) |
+| Insertion Sort | O(n) | O(n²) | O(n²) |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) |
+| Quick Sort | O(n log n) | O(n log n) | O(n²) |
+| Heap Sort | O(n log n) | O(n log n) | O(n log n) |
+| Counting Sort | O(n + k) | O(n + k) | O(n + k) |
+| Radix Sort | Depends on implementation | Depends on implementation | Depends on implementation |
 
-Tailwind is loaded from its CDN, so an internet connection is required.
 
-## 📌 Project structure
+### Pathfinding Algorithms
 
-```
-Algoviz/
+- **Breadth-First Search (BFS):** Explores nodes level by level and finds a shortest path in an unweighted graph.
+- **Depth-First Search (DFS):** Explores deeper nodes before backtracking.
+- **Dijkstra's Algorithm:** Finds shortest paths in graphs with non-negative edge weights.
+- **A* Search:** Uses path cost and a heuristic to guide the search toward the target.
+
+
+## 🛠️ Tech Stack
+
+- **HTML5** — Page structure
+- **CSS3** — Custom styling
+- **Tailwind CSS** — Utility-based styling
+- **JavaScript** — Algorithm implementation and interactivity
+- **SVG** — Graph visualization
+
+
+## 📁 Project Structure
+
+```text
+AlgoViz/
 ├── index.html
 ├── style.css
-├── main.js              
-├── sorting/                  # sorting UI, animation, tabs, theme
-    ├── bubble.js         
-    ├── selection.js         
-    ├── insertion.js
-    ├── merge.js
-    ├── quick.js              
-    ├── counting.js
-    ├── heap.js
-    └── radix.js
-└── pathfinding/              # edge weights, adjacency list, path tracing
-    ├── utils.js         
-    ├── graph.js 
-    ├── bfs.js         
-    ├── astar.js         
+├── main.js
+├── README.md
+│
+├── sorting/
+│   ├── bubble.js
+│   ├── selection.js
+│   ├── insertion.js
+│   ├── merge.js
+│   ├── quick.js
+│   ├── heap.js
+│   ├── counting.js
+│   └── radix.js
+│
+└── pathfinding/
+    ├── utils.js
+    ├── bfs.js
     ├── dfs.js
-    └── dijkstra.js
+    ├── dijkstra.js
+    ├── astar.js
+    └── graph.js
 ```
 
-## How it works
 
-Algorithms and UI are separated. Each algorithm is a pure function that **does not touch the page**. It only returns a list of steps, and the UI plays those steps back with `async/await` and a delay.
+## 🚀 Getting Started
 
-- Sorting steps: `compare`, `swap`, `overwrite` (merge sort), `sorted`
-- Pathfinding steps: `visit`, `edge`, `dist`, `found`
+### Prerequisites
 
-This makes every algorithm easy to test and means a new algorithm only needs one new file and one line to register it.
+- A modern web browser
+- Visual Studio Code or another code editor
+- Internet connection to load Tailwind CSS from its CDN
 
-## Algorithm complexity
 
-| Algorithm | Best | Average | Worst | Space |
-|-----------|------|---------|-------|-------|
-| Bubble    | O(n) | O(n²) | O(n²) | O(1) |
-| Selection | O(n²) | O(n²) | O(n²) | O(1) |
-| Insertion | O(n) | O(n²) | O(n²) | O(1) |
-| Merge     | O(n log n) | O(n log n) | O(n log n) | O(n) |
-| Quick     | O(n log n) | O(n log n) | O(n²) | O(log n) |
+### Installation
 
-BFS and DFS run in O(V + E). Dijkstra runs in O((V + E) log V) with a priority queue (this project uses a simple scan for clarity). A* uses a Manhattan-distance heuristic and finds the shortest path while visiting fewer cells.
+**1. Clone the repository**
 
-## What I learned
+```bash
+git clone https://github.com/tasfia-Nowrin/AlgoViz---Algorithm-Visualizer.git
+```
 
-- Designing algorithms as pure functions that return steps
-- Async JavaScript for animation (`async/await`, timers)
-- DOM manipulation, pointer events for mouse and touch
-- Graph search and how heuristics change behavior
-- Responsive, accessible UI with Tailwind CSS
+**2. Navigate to the project directory**
 
-## Possible improvements
+```bash
+cd AlgoViz---Algorithm-Visualizer
+```
 
-- Directed edges and editable edge weights
-- A grid mode with walls and maze generation
-- Shell sort, Greedy Best-First Search, and Bellman-Ford
+**3. Run the application**
 
-## License
+Open `index.html` in your browser, or use the Live Server extension in Visual Studio Code.
 
-© 2026 Tasfia Nowrin. All rights reserved.
+No backend server or database is required.
+
+
+## 📖 How to Use
+
+### Sorting
+1. Select a sorting algorithm.
+2. Adjust the array size and animation speed.
+3. Click **Animate** to start.
+4. Use Pause, Reset, Step, or New Array to control the visualization.
+5. Observe the comparison and swap statistics.
+
+
+### Pathfinding
+1. Open the Pathfinding section.
+2. Select an algorithm.
+3. Choose the start and target nodes.
+4. Use graph tools to move nodes, add nodes, or create links.
+5. Start the animation and observe the search process.
+6. Review the visited nodes, checked edges, and path cost.
+
+
+## 🎯 Project Objectives
+
+- Make algorithms easier to understand through visualization.
+- Demonstrate sorting and pathfinding techniques interactively.
+- Help learners explore algorithm behavior and complexity.
+- Practice JavaScript, DOM manipulation, and event handling.
+
+
+## 🔮 Future Improvements
+
+- Add more algorithms and visualization options.
+- Improve mobile responsiveness and accessibility.
+- Add customizable graph sizes and edge weights.
+- Include detailed algorithm explanations and learning challenges.
+- Add algorithm performance comparisons.
+
+
+## 👩‍💻 Author
+
+**Tasfia Nowrin**
+
+GitHub: [tasfia-Nowrin](https://github.com/tasfia-Nowrin)
+
+
+## 📄 License
+
+This project is intended for educational and personal learning purposes. Add an open-source license file if you want to define reuse and redistribution permissions.
+
+---
+
+*AlgoViz — Making Algorithms Easier to See, Explore, and Understand.*
