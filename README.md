@@ -1,13 +1,11 @@
-# AlgoViz
+# 📊AlgoViz
 
 An interactive visualizer for sorting and pathfinding algorithms, built with **HTML, CSS, Tailwind CSS and vanilla JavaScript**. No frameworks and no build step.
 
-**Live demo:** https://YOUR-USERNAME.github.io/algoviz/
 
-<!-- Add screenshots to an assets/ folder and uncomment:
-![Sorting view](assets/sorting.png)
-![Pathfinding view](assets/pathfinding.png)
--->
+## 🌐 Live demo:
+🔗 https://YOUR-USERNAME.github.io/algoviz/
+
 
 ## Features
 
@@ -89,4 +87,4 @@ BFS and DFS run in O(V + E). Dijkstra runs in O((V + E) log V) with a priority q
 
 ## License
 
-MIT
+© 2026 Tasfia Nowrin. All rights reserved.
